@@ -1,0 +1,12 @@
+<ion-list style="padding:5px;margin:5px;width:250px!important;margin-top: 0px !important">
+
+
+	<div  *ngFor="let not of notifications">
+    	<span style="color:gray;font-size: 10px">{{not.date | amCalendar}}</span>
+		<p  *ngIf="not.order_status=='REPENDING'" style="color:gray;font-size: 11px!important" wrap-text>{{'Order is in waiting status ' | translate}}</p>
+		<p  *ngIf="not.order_status=='INROW'" style="color:gray;font-size: 11px!important" wrap-text>{{'Order has been accepted ' | translate}}</p>
+		<p  *ngIf="not.order_status=='INPROGRESS'" style="color:gray;font-size: 11px!important" wrap-text>{{'Order has been picked up ' | translate}}</p>
+		<p  *ngIf="not.order_status=='DELIVERED'" style="color:gray;font-size: 11px!important" wrap-text>{{'Order has been delivered ' | translate}}</p>
+	</div>
+
+ </ion-list>

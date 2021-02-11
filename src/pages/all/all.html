@@ -1,0 +1,102 @@
+<ion-header >
+
+  <ion-navbar >
+
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title color="primary">
+     {{'All Orders'|translate}}
+    </ion-title>
+    <ion-buttons right>
+       <button  ion-button icon-only style="padding-top: 5px"  (click)="showFilter()" >
+         <ion-icon  small name="ios-funnel-outline"></ion-icon>
+       </button>
+     </ion-buttons>
+
+  </ion-navbar>
+
+
+</ion-header>
+
+<ion-content [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" overflow-scroll="true"  >
+<ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingText="" pullingText="{{'Pull to refresh'| translate}}"></ion-refresher-content>
+  </ion-refresher>
+ <ion-spinner [hidden]="done_loading" class="noorders" name="dots"></ion-spinner>
+ <ion-note class="noorders" *ngIf="NoOrders" text-wrap>
+ {{ 'No Orders Found' | translate }}
+ </ion-note>
+
+  <ion-card text-wrap *ngFor="let order of orders" id="{{order.id}}" style="position: relative;">
+
+  <div *ngIf="order.package.img" >
+      <img  [src]="order.package.thumbnail_ph" (click)="openOrderImage(order)" style="max-width: 360px;max-height: 270px" width="auto" height="auto"  />
+  </div>
+  <div [ngClass]="[language === 'ar' ? 'rtl_more' : 'ltr_more']" >
+    <button  mini edge  (click)="presentActionSheet(order)"  class="cardmorebtn" >
+          <ion-icon  name="more" large></ion-icon>
+     </button>
+  </div>
+
+  <div  *ngIf="hasNotifications(order.id)" [ngClass]="[language === 'ar' ? 'o-not-ar' : 'o-not-en']"   >
+    <button  mini edge  (click)="openNotification(order,$event)"  [ngClass]="[language === 'ar' ? 'cardnotificationbtn-ar' : 'cardnotificationbtn-en']"  >
+       <ion-badge id="notifications-badge" color="danger">{{orderNotificationCount(order.id)}}</ion-badge>
+     </button>
+  </div>
+
+
+  <div ion-item>
+    <ion-icon name="ios-flash-outline" item-left large ></ion-icon>
+    <h2>{{'Order status'|translate}}</h2>
+    <ion-badge  *ngIf="order.order_status.customer_order_status === 'PENDING'" style="background-color: #488add" ><p style="color:white ;">{{'Waiting'|translate}}</p></ion-badge>
+    <ion-badge  *ngIf="order.order_status.customer_order_status === 'INROW'" style="background-color: #2c5c84"><p style="color:white ;">{{'Accepted'|translate}}</p></ion-badge>
+    <ion-badge  *ngIf="order.order_status.customer_order_status === 'INPROGRESS'" style="background-color: #f53d3d"><p style="color:white ;">{{'Picked Up'|translate}}</p></ion-badge>
+    <ion-badge  *ngIf="order.order_status.customer_order_status === 'DELIVERED'" style="background-color: #20ab5e"><p style="color:white ;">{{'Delivered'|translate}}</p></ion-badge>
+    <ion-badge  *ngIf="order.order_status.confirm_delivery" style="background-color: rgba(0, 0, 0, 0);"><p style="color:gray ;">{{order.delivered_at | amTimeAgo}}</p></ion-badge>
+  </div>
+
+
+  <div ion-item>
+    <ion-icon name="ios-basket-outline" item-left large></ion-icon>
+    <h2 >{{ order.package.title }}</h2>
+    <p>{{ order.package.note }}</p>
+  </div>
+
+  <div data-tap-disabled="true"  tappable ion-item  style="background-color: white!important"  *ngIf="order.driver_username">
+  <ion-icon name="ios-car-outline" item-right large ></ion-icon>
+   <div class="imgsize" item-left>
+     <img (tap)="openDriverImage(order)" *ngIf="order.driver_img" [src]="order.driver_img">
+     <img *ngIf="order.driver_img == null" src="../assets/img/avatar.jpg">
+   </div>
+   <h2 tappable (tap)="callPhoneNumber(order.driver_phone)"  *ngIf="order.driver_fullname">{{order.driver_fullname }}</h2>
+   <h2 tappable (tap)="callPhoneNumber(order.driver_phone)"  *ngIf="order.driver_fullname == null">{{order.driver_username }}</h2>
+   <p tappable (tap)="callPhoneNumber(order.driver_phone)" [ngClass]="[language === 'ar' ? 'rtl_phone' : 'ltr_phone']">{{ order.driver_phone }}</p>
+ </div>
+
+  <div ion-item *ngIf="order.order_status.confirm_delivery === false">
+    <button [ngClass]="[order.order_status.customer_order_status != 'INPROGRESS' ? 'dis-opacity' : '']"  style="font-size:14px" (click)="openOrderTrack(order)" *ngIf="order.order_status.customer_order_status != 'DELIVERED' " ion-button icon-left clear item-right>
+      <ion-icon style="padding-left:10px" name="navigate"></ion-icon>
+      {{'Track order'|translate}}
+    </button>
+     <button  style="font-size:14px" (click)="confirmDelivery(order)" *ngIf="order.order_status.customer_order_status === 'DELIVERED' && order.order_status.confirm_delivery === false " ion-button icon-left clear item-right>
+      <ion-icon style="padding-left:10px" name="thumbs-up"></ion-icon>
+      {{'Confirm Delivery'|translate}}
+    </button>
+  </div>
+
+</ion-card>
+
+
+
+
+  <ion-infinite-scroll (ionInfinite)="getMoreOrders($event)">
+   <ion-infinite-scroll-content loadingText="{{'Loading orders...'| translate}}"> </ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+
+
+
+
+
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title>
+      {{'When'|translate}}
+    </ion-title>
+
+  <ion-buttons end>
+                <button ion-button icon-only (click)="dismiss()">
+                    <ion-icon large item-right name="close"></ion-icon>
+                </button>
+            </ion-buttons>
+  </ion-navbar>
+
+
+
+</ion-header>
+
+<ion-content [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" text-wrap>
+
+<form #neworder [formGroup]="editOrderForm">
+ <ion-list>
+  <ion-list-header>
+   {{'Pick up time' |translate}}
+   <ion-icon name="ios-clock-outline" item-right></ion-icon>
+  </ion-list-header>
+  <ion-item>
+   <ion-label [ngClass]="[order.pickup_time_asap === false ? 'disabled-label' : '']" tooltip="As soon as possible" >{{'Asap'|translate}}</ion-label>
+   <ion-toggle (ngModelChange)="pickup_toggle($event)" [ngModelOptions]="{standalone: true}"
+    [(ngModel)]="order.pickup_time_asap" ></ion-toggle>
+ </ion-item>
+ <div ion-item *ngIf="order.pickup_time_asap==false" style="background-color: white!important">
+    <ion-datetime   displayFormat="DDD MMM DD,YYYY HH:mm" [max]="pickup_time_max" [min]="pickup_time_min" (ngModelChange)="pickup_changed($event)" formControlName="pickup_time" name="pickup_time" [(ngModel)]="order.pickup_time" >
+     </ion-datetime>
+   </div>
+</ion-list>
+<ion-list>
+ <ion-list-header>
+  {{'Drop off time'|translate}}
+  <ion-icon name="ios-clock-outline" item-right></ion-icon>
+ </ion-list-header>
+ <ion-item>
+  <ion-label [ngClass]="[order.dropoff_time_asap === false ? 'disabled-label' : '']" tooltip="As soon as possible" >{{'Asap'|translate}}</ion-label>
+  <ion-toggle (ngModelChange)="dropoff_toggle($event)" [(ngModel)]="order.dropoff_time_asap"
+   [ngModelOptions]="{standalone: true}" ></ion-toggle>
+</ion-item>
+<ion-item *ngIf="order.dropoff_time_asap==false" style="background-color: white!important">
+<ion-datetime  displayFormat="DDD MMM DD,YYYY HH:mm" [max]="dropoff_time_max" [min]="dropoff_time_min" formControlName="dropoff_time" name="dropoff_time" [(ngModel)]="order.dropoff_time" >
+ </ion-datetime>
+ </ion-item>
+</ion-list>
+<ion-list>
+    <ion-item>
+      <ion-note text-wrap>
+        {{'Asap : As soon as there is an available agent the order will be accepted'|translate}}
+      </ion-note>
+
+    </ion-item>
+  </ion-list>
+
+
+</form>
+
+  <ion-fab style="padding-bottom: 40px;" bottom right edge>
+      <button type="submit" (click)="doneEditing()" [disabled]="!isFormValid()" ion-fab >
+           <ion-icon name="checkmark" ></ion-icon>
+       </button>
+    </ion-fab>
+  
+
+</ion-content>

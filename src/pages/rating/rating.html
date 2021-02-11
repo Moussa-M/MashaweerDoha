@@ -1,0 +1,67 @@
+
+
+
+<ion-content class="main-view" [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" no-bounce >
+<div class="overlay" (press)="dismiss()" (tap)="dismiss()" (click)="dismiss()" ></div>
+<div class="modal_content" overflow-scroll="false"  style="background-color: transparent !important;">
+	<ion-note style="font-size:25px">{{'Give us a rating'|translate}}</ion-note>
+	<ion-card-content >
+		<span style="font-size:15px">{{'Timing'|translate}} ({{timing}}/5)</span>
+		<rating [ngModelOptions]="{standalone: true}"  [(ngModel)]="timing"
+	 	readOnly="false"
+	 	max="5"
+	 	emptyStarIconName="star-outline"
+	 	halfStarIconName="star-half"
+	 	starIconName="star"
+	 	nullable="false">
+	 </rating>
+	 <span style="font-size:15px">{{'Treatment'|translate}} ({{treatment}}/5)</span>
+	 <rating [ngModelOptions]="{standalone: true}"  [(ngModel)]="treatment"
+	 readOnly="false"
+	 max="5"
+	 emptyStarIconName="star-outline"
+	 halfStarIconName="star-half"
+	 starIconName="star"
+	 nullable="false">
+	</rating>
+	<span style="font-size:15px">{{'OverAll'|translate}} ({{rate.stars}}/5)</span>
+	<rating [ngModelOptions]="{standalone: true}"  [(ngModel)]="rate.stars"
+	readOnly="false"
+	max="5"
+	emptyStarIconName="star-outline"
+	halfStarIconName="star-half"
+	starIconName="star"
+	nullable="false">
+ </rating>
+			 <ion-textarea [hidden]="true" #note  name="note" [(ngModel)]="rate.note" [ngModelOptions]="{standalone: true}" maxlength="150" type="text"  clearInput placeholder="Tell us more and help us make better decisions next time"></ion-textarea>
+			 <!-- <div *ngIf="rate.stars < 5" clas="item item-input-inset">
+				 <p>Where was the inconveniences ?</p>
+				 <div>
+				    <ion-label>Treatment</ion-label>
+				    <ion-checkbox [(ngModel)]="treatment"></ion-checkbox>
+				  </div>
+					<div>
+ 				    <ion-label>Timimg</ion-label>
+ 				    <ion-checkbox [(ngModel)]="timimg"></ion-checkbox>
+ 				  </div>
+					<div>
+						<ion-label>Fare</ion-label>
+						<ion-checkbox [(ngModel)]="fare"></ion-checkbox>
+					</div>
+					<div>
+						<ion-label>Other</ion-label>
+						<ion-checkbox [(ngModel)]="othwe"></ion-checkbox>
+					</div>
+			 </div> -->
+	</ion-card-content>
+
+
+<div style="position: absolute; bottom: 10px; width: 100%">
+    <div style="text-align: center">
+			<button style="text-align:center;" (click)="submitRating()" ion-button type="submit" outline >
+        <ion-icon name="star" ></ion-icon>
+        {{'Rate'|translate}}</button>
+    </div>
+</div>
+</div>
+</ion-content>

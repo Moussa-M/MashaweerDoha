@@ -1,0 +1,15 @@
+<ion-content style="padding:0px!important" [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" no-bounce scroll="false">
+  <div class="splash-bg"></div>
+  <div class="splash-info">
+    <div class="splash-logo"></div>
+    <!-- <div class="splash-intro">
+      {{ 'Hello, your first order is few clicks away!' | translate }}
+    </div> -->
+  </div>
+  <div padding>
+    <button ion-button block  (click)="signup()" class="signup">{{ 'Create an account' | translate }}</button>
+    <button ion-button block (click)="login()" class="login">{{ 'LogIn' | translate }}</button>
+    <br/>
+    <button ion-button block outline (click)="continue()" class="login">{{ 'Continue' | translate }}</button>
+  </div>
+</ion-content>

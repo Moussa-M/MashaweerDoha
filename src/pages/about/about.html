@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{'About'|translate}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" >
+<div id="mashlogo"></div>
+<ion-item [hidden]="language === 'ar' ? true : false" text-wrap style="color:gray;font-size: 15px !important">
+
+	A delivery company for delivering merchandise to you or your customers. <br/> Our professional employees will take care of your goods, wherever you send them. <br/>You are granted complete control over the process of delivery by phone or by our mobile app.
+
+</ion-item >
+<ion-item [hidden]="language === 'en' ? true : false"  text-wrap style="color:gray;font-size: 15px !important">
+
+شركة توصيل البضائع , لك أو لعملائك.<br/> سيقوم موظفونا المهنيون برعاية بضائعك، أينما ترسلها. <br/> يتم منحك مراقبة كاملة على عملية التسليم عن طريق الهاتف أو من خلال تطبيق الجوال.
+
+</ion-item>
+
+<div style="position: absolute; bottom: 0px; width: 100%">
+    <div style="text-align: center">
+      <p>{{'MashaweerDoha'|translate}} ©2017</p>
+      <p>{{'Version'|translate}} {{version}}</p>
+    </div>
+</div>
+</ion-content>

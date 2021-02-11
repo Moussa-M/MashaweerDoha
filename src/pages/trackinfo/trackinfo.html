@@ -1,0 +1,53 @@
+<ion-header>
+
+  <ion-navbar hideBackButton="true">
+
+    <ion-title>
+      {{'Order tracking'|translate}}
+    </ion-title>
+
+  <ion-buttons end>
+                <button ion-button icon-only (click)="dismiss()">
+                    <ion-icon large item-right name="close"></ion-icon>
+                </button>
+            </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" text-wrap>
+<ion-item *ngIf="language=='en'" text-wrap style="color:gray;font-size: 15px !important">
+  You can't track this order until it has been picked up<br/>
+  You order will pass through the following status :
+  <br/>
+  <ion-badge   style="background-color: #488add" ><p style="color:white ;">{{'Waiting'|translate}}</p></ion-badge>
+  Waiting for one of our agents to accepte it <ion-icon *ngIf="order.order_status.customer_order_status === 'PENDING'" name="ios-checkmark-outline"></ion-icon>
+  <hr>
+  <ion-badge  style="background-color: #2c5c84"><p style="color:white ;">{{'Accepted'|translate}}</p></ion-badge>
+  Accepted by one of our agents <ion-icon *ngIf="order.order_status.customer_order_status === 'INROW'" name="ios-checkmark-outline"></ion-icon>
+  <hr>
+  <ion-badge style="background-color: #f53d3d"><p style="color:white ;">{{'Picked Up'|translate}}</p></ion-badge>
+  The agent has picked up your order from its pickup location <ion-icon *ngIf="order.order_status.customer_order_status === 'INPROGRESS'" name="ios-checkmark-outline"></ion-icon>
+  <hr>
+  <ion-badge  style="background-color: #20ab5e"><p style="color:white ;">{{'Delivered'|translate}}</p></ion-badge>
+  The agent has arrived to the drop off location and delivered your order <ion-icon *ngIf="order.order_status.customer_order_status === 'DELIVERED'" name="ios-checkmark-outline"></ion-icon>
+</ion-item>
+
+<ion-item *ngIf="language=='ar'" text-wrap style="color:gray;font-size: 15px !important">
+  لا يمكنك تتبع هذا الطلب حتى يتم إستلامه<br/>
+  سيمر طلبك عبر الحالات التالية
+<br/>
+  <ion-badge style="background-color: #488add" ><p style="color:white ;">{{'Waiting'|translate}}</p></ion-badge>
+  في إنتظار واحد من وكلائنا لقبوله<ion-icon *ngIf="order.order_status.customer_order_status === 'PENDING'" name="ios-checkmark-outline"></ion-icon>
+  <hr>
+  <ion-badge  style="background-color: #2c5c84"><p style="color:white ;">{{'Accepted'|translate}}</p></ion-badge>
+  تم قبوله من قبل أحد من وكلائنا<ion-icon *ngIf="order.order_status.customer_order_status === 'INROW'" name="ios-checkmark-outline"></ion-icon>
+  <hr>
+  <ion-badge  style="background-color: #f53d3d"><p style="color:white ;">{{'Picked Up'|translate}}</p></ion-badge>
+  الوكيل إستلم طلبك من موقع إستلام الطلب  <ion-icon *ngIf="order.order_status.customer_order_status === 'INPROGRESS'" name="ios-checkmark-outline"></ion-icon>
+  <hr>
+  <ion-badge   style="background-color: #20ab5e"><p style="color:white ;">{{'Delivered'|translate}}</p></ion-badge>
+  وصل الوكيل إلى موقع التسليم وسلم طلبك      <ion-icon *ngIf="order.order_status.customer_order_status === 'DELIVERED'" name="ios-checkmark-outline"></ion-icon>
+</ion-item>
+
+</ion-content>

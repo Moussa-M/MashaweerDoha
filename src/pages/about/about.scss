@@ -1,0 +1,30 @@
+page-about {
+ #mashlogo{
+	 	background: url('../assets/img/mashaweer_doha_logo.png') no-repeat;
+	 	width: 108%;
+	 	height: 150px;
+	 	padding-top: 10px;
+	 	background-color: rgba(0, 0,0, 0);
+    }
+
+    .rtl_more{
+  position: absolute;z-index: 999;top:10px;left:10px
+}
+.ltr_more{
+  position: absolute;z-index: 999;top:10px;right:10px
+}
+.rtl_phone{
+  direction:ltr!important;
+  float:right;
+}
+.ltr_phone{
+  direction:ltr!important;
+  float:left;
+}
+.rtl_{
+  direction:rtl;
+}
+.ltr_{
+   direction:ltr;
+}
+}

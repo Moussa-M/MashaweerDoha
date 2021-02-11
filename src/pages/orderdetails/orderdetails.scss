@@ -1,0 +1,52 @@
+page-orderdetails {
+     .mapContainer{
+     height:270px;
+		width:100%;
+     min-height:270px;
+     position:fixed;
+	    top:40px;
+	    right:0px;
+	    z-index:999;
+     }
+	#map_canvas{
+
+		height:270px;
+		width:100%;
+
+
+	}
+	.imgsize img{
+			width:48px;
+			height:48px;
+	}
+	.scroll-content{
+	margin-top:334px!important;
+	}
+
+.rtl_more{
+  position: absolute;z-index: 999;top:10px;left:10px
+}
+.ltr_more{
+  position: absolute;z-index: 999;top:10px;right:10px
+}
+.rtl_phone{
+  direction:ltr!important;
+  float:right;
+}
+.ltr_phone{
+  direction:ltr!important;
+  float:left;
+}
+.rtl_{
+  direction:rtl;
+}
+.ltr_{
+   direction:ltr;
+}
+}
+
+._gmaps_cdv_ .nav-decor {
+    display: none !important;
+    background-color: rgba(0,0,0,0) !important;
+    background: rgba(0,0,0,0) !important;
+}

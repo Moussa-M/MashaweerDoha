@@ -1,0 +1,100 @@
+<ion-header  no-shadow>
+  <ion-navbar [hidden]="showSkip">
+    <ion-buttons end >
+      <button ion-button (click)="skipIntro()" color="primary">{{ 'Skip' | translate}}</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content no-bounce data-tap-disabled="true"  >
+  <ion-slides  style="color:gray" pager="true"  (ionSlideWillChange)="onSlideChangeStart($event)" padding >
+
+    <ion-slide >
+      <ion-grid>
+          <ion-row>
+            <ion-col text-center>
+              <button ion-button icon-end large clear (click)="startEng()">
+                English
+                <ion-icon name="arrow-forward"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col text-center>
+              <button ion-button icon-end large clear (click)="startAr()">
+              العربية
+              <ion-icon name="arrow-forward"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+    </ion-slide>
+
+    <ion-slide>
+      <ion-grid>
+          <ion-row>
+            <ion-col text-center>
+      <img src="../www/assets/img/mashaweer_doha_logo.png">
+      <h1>{{'Welcome to MashaweerDoha'|translate}}</h1>
+      <p>{{'Qatari Number one leading company in delivery service.'|translate}}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+    </ion-slide>
+
+    <ion-slide >
+      <ion-grid>
+          <ion-row>
+            <ion-col text-center>
+      <img src="../www/assets/img/stopwatch.png">
+      <h1>{{'Fast Delivery'|translate}}</h1>
+      <p>{{'With MashaweerDoha Tracking System you will get your orders exactly on time.'|translate}}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+    </ion-slide>
+
+     <ion-slide>
+       <ion-grid>
+           <ion-row>
+             <ion-col text-center>
+      <img src="../www/assets/img/privacy.jpg">
+      <h1>{{'Privacy'|translate}}</h1>
+      <p>{{'Your privacy is number one priority with MashaweerDoha.'|translate}}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+    </ion-slide>
+    <ion-slide>
+      <ion-grid>
+          <ion-row>
+            <ion-col text-center>
+      <img src="../www/assets/img/gps.png">
+      <h1>{{'Tracking Orders'|translate}}</h1>
+      <p>{{'Keep an eye on your orders on the map till the delivery time.'|translate}}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-grid>
+          <ion-row>
+            <ion-col text-center>
+                <h2 class="slide-title">{{ 'Ready to make orders?' | translate }}</h2>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col text-center>
+              <button ion-button outline large (click)="skipIntro()">
+                {{ 'Ready' | translate }}
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

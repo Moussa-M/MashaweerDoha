@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar hideBackButton="true">
+
+    <ion-title>
+      {{'Estimated fare'|translate}}
+    </ion-title>
+
+  <ion-buttons end>
+                <button ion-button icon-only (click)="dismiss()">
+                    <ion-icon large item-right name="close"></ion-icon>
+                </button>
+            </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" text-wrap>
+<ion-item *ngIf="language=='en'" text-wrap style="color:gray;font-size: 15px !important">
+  The estimated fare is calculated based on two factors which are<br/>
+  <br/><b>Distance(1.65 QAR/1 KM)</b><br/>
+  <b>Time</b><br/><br/>
+  Taking in consideration that : <br/>
+  The base fare is <b>40.00 QAR</b>.<br/>
+  And time fare is applicable only if the agent
+  passed <b>20 MIN</b> waiting at the pickup location or drop off location.<br/><br/>
+  For more info how the fare is estimated please refer to our website terms and condition.
+</ion-item>
+
+<ion-item *ngIf="language=='ar'" text-wrap style="color:gray;font-size: 15px !important">
+  يتم احتساب الأجرة المقدرة على أساس عاملين هما<br/>
+  <br/><b>المسافة (1.65 رق / 1 كم)</b><br/>
+  <b>الوقت</b><br/><br/>
+  مع الأخذ في الإعتبار بما يلي: <br/>
+  السعر الأساسي هو<b>40.00 رق</b>.<br/>
+ وأجرة الوقت تطبق فقط إذا كان الوكيل مرت عليه أكثر من 20 دقيقة في الإنتظار في موقع الإستلام أو التوصيل<br/><br/>
+  لمزيد من المعلومات عن كيف حساب أجرة التوصيل يرجى الرجوع إلى موقعنا على الانترنت.
+</ion-item>
+
+</ion-content>

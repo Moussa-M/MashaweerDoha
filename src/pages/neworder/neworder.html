@@ -1,0 +1,65 @@
+<ion-header >
+  <ion-navbar>
+    <ion-title>
+      {{'Location'|translate}}
+    </ion-title>
+            <ion-buttons end *ngIf="location_choose_type != 'CHOOSE_FROM_MAP'">
+                <button ion-button icon-only (tap)="dismiss()">
+                    <ion-icon large item-right name="close"></ion-icon>
+                </button>
+            </ion-buttons>
+            <ion-buttons end *ngIf="location_choose_type == 'CHOOSE_FROM_MAP'">
+                <button ion-button  (click)="chooseLocation()" (tap)="chooseLocation()">
+                    {{'Choose'|translate}}
+                </button>
+            </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content  scroll="false" [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" no-bounce>
+  <form class="form_style" *ngIf="location_choose_type != 'CHOOSE_FROM_MAP'" #neworder [formGroup]="newOrderForm">
+       <ion-list no-lines style="background-color: white!important">
+
+        <ion-row  style="background-color: white!important">
+        <ion-col class="pick" col-12>
+         <div tappable (tap)="showModal('ORIG')"  (press)="showModal('ORIG')" data-tap-disabled="true"  ion-item  formGroupName="location">
+         <ion-icon  style="color:gray;margin: 0px" name="ios-pin-outline" item-left ></ion-icon>
+         <ion-input  dir="auto" type="text" formControlName="pick_up_name" name="pick_up_name"  id="origin" [(ngModel)]="order.location.pick_up_name"  placeholder="{{'Pick Up address' | translate}}"></ion-input>
+       </div>
+        </ion-col>
+        <!-- <ion-col (tap)="setPickUpCurrentLocation()" tappable style="background-color: white;">
+          <ion-icon tappable  class="locate" name="ios-locate-outline" item-right large></ion-icon>
+        </ion-col> -->
+      </ion-row>
+
+      <ion-row  style="background-color: white!important">
+        <ion-col col-12>
+           <div tappable (press)="showModal('DIST')" (tap)="showModal('DIST')"  data-tap-disabled="true" ion-item formGroupName="location">
+           <ion-icon style="color:gray;margin: 0px" name="ios-flag-outline" item-left ></ion-icon>
+         <ion-input  dir="auto" type="text" formControlName="drop_off_name" name="drop_off_name"  id="destination" [(ngModel)]="order.location.drop_off_name"  placeholder="{{'Drop Off address' |translate}}"></ion-input>
+       </div>
+        </ion-col>
+        <!-- <ion-col (tap)="setDropOffCurrentLocation()" tappable style="background-color: white;">
+          <ion-icon tappable class="locate" name="ios-locate-outline" item-right large></ion-icon>
+        </ion-col> -->
+      </ion-row>
+       </ion-list>
+  </form>
+      <div  #map id="map_canvas">
+        <div disabled *ngIf="location_choose_type == 'CHOOSE_FROM_MAP'" class="centerMarkerOrig"></div>
+
+          <div *ngIf="location_choose_type != 'CHOOSE_FROM_MAP'" style="position: absolute;bottom: 15px;left:10px;background-color: white;margin:0px;padding: 10px;border-radius: 5px">
+             <div style="font-size: 12px">{{'Delivery fare'|translate}}</div>
+            <button (tap)="openPriceWindow()" ion-button="" item-right="" outline="" class="disable-hover item-button button button-md button-outline button-outline-md">
+              <span class="button-inner"> {{ order.order_payment.delivery_price }} {{'QAR'|translate}}</span>
+              <div class="button-effect" style="transform: translate3d(-39px, -26px, 0px) scale(1); height: 90px; width: 90px; opacity: 0; transition: transform 270ms, opacity 189ms 81ms;">
+              </div></button>
+          </div>
+      </div>
+
+      <ion-fab *ngIf="location_choose_type != 'CHOOSE_FROM_MAP'" style="padding-bottom: 40px;" bottom right edge>
+        <button type="submit" (click)="orderTime()" (tap)="orderTime()" [disabled]="!isFormValid()" ion-fab >
+             <ion-icon name="arrow-round-forward" ></ion-icon>
+         </button>
+      </ion-fab>
+
+</ion-content>

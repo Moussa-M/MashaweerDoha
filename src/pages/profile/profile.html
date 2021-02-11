@@ -1,0 +1,264 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      {{'Profile'|translate}}
+    </ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content  overflow-scroll="true" >
+      <!--<ion-list-header>Ionic</ion-list-header>-->
+
+    <ion-card-header>
+    <ion-row style="text-align: center">
+    <ion-col style="text-align: center">
+    <div tappable (click)="changeProfileImg()" class="imgsize">
+        <img-loader *ngIf="profile.standard" id="avatar" [src]="profile.standard" useImg></img-loader>
+        <img-loader *ngIf="profile.standard == null" src="../www/assets/img/avatar.jpg" useImg></img-loader>
+      </div>
+    </ion-col>
+
+    </ion-row>
+    </ion-card-header>
+  <hr>
+    <ion-card-content *ngIf="profile">
+      <ion-list>
+
+        <ion-row>
+          <ion-col col-10>
+            <ion-item *ngIf="!editfn">
+              <ion-label stacked>{{ 'First name' | translate}}</ion-label>
+            <ion-note  item-right>
+            {{profile.firstname}}
+            </ion-note>
+          </ion-item>
+            <ion-item *ngIf="editfn">
+               <ion-input type="text"   [(ngModel)]="firstname"></ion-input>
+           </ion-item>
+          </ion-col>
+          <ion-col col-2>
+            <button  (click)="editFN()" *ngIf="!editfn" class="pencil" item-right>
+               <ion-icon ios="md-create" md="md-create" ></ion-icon>
+            </button>
+            <button  (click)="saveFN()" *ngIf="editfn" class="xpencil" item-right>
+                 <ion-icon ios="md-done-all" md="md-done-all" ></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-10>
+            <ion-item *ngIf="!editln">
+              <ion-label stacked>{{ 'Last name' | translate}}</ion-label>
+            <ion-note  item-right>
+            {{profile.lastname}}
+            </ion-note>
+          </ion-item>
+            <ion-item *ngIf="editln">
+               <ion-input type="text"   [(ngModel)]="lastname"></ion-input>
+           </ion-item>
+          </ion-col>
+          <ion-col col-2>
+            <button  (click)="editLN()" *ngIf="!editln" class="pencil" item-right>
+               <ion-icon ios="md-create" md="md-create" ></ion-icon>
+            </button>
+            <button  (click)="saveLN()" *ngIf="editln" class="xpencil" item-right>
+                 <ion-icon ios="md-done-all" md="md-done-all" ></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-10>
+            <ion-item *ngIf="!editbirthday">
+              <ion-label stacked>{{ 'Birthday' | translate}}</ion-label>
+            <ion-note  item-right>
+            {{profile.birthday | date: 'dd/MM/yyyy'}}
+            </ion-note>
+          </ion-item>
+            <ion-item *ngIf="editbirthday">
+              <ion-datetime *ngIf="editbirthday" [(ngModel)]="birthday" displayFormat="DDD MMM DD,YYYY" [max]="BIRTHDAY_MAX" >
+             </ion-datetime>
+           </ion-item>
+          </ion-col>
+          <ion-col col-2>
+            <button  (click)="editBirthDay()" *ngIf="!editbirthday" class="pencil" item-right>
+               <ion-icon ios="md-create" md="md-create" ></ion-icon>
+            </button>
+            <button  (click)="saveBirthDay()" *ngIf="editbirthday" class="xpencil" item-right>
+                 <ion-icon ios="md-done-all" md="md-done-all" ></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-10>
+            <ion-item *ngIf="!editsexe">
+              <ion-label stacked>{{ 'Gender' | translate}}</ion-label>
+            <ion-note  item-right>
+            {{profile.sexe}}
+            </ion-note>
+          </ion-item>
+            <ion-item *ngIf="editsexe">
+              <ion-select style="max-width: 100% !important;"  *ngIf="editsexe" [(ngModel)]="sexe">
+                    <ion-option value="Female">Female</ion-option>
+                    <ion-option value="Male">Male</ion-option>
+              </ion-select>
+           </ion-item>
+          </ion-col>
+          <ion-col col-2>
+            <button  (click)="editSexe()" *ngIf="!editsexe" class="pencil" item-right>
+               <ion-icon ios="md-create" md="md-create" ></ion-icon>
+            </button>
+            <button  (click)="saveSexe()" *ngIf="editsexe" class="xpencil" item-right>
+                 <ion-icon ios="md-done-all" md="md-done-all" ></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-10>
+            <ion-item *ngIf="!editcity">
+              <ion-label stacked>{{ 'City' | translate}}</ion-label>
+            <ion-note  item-right>
+            {{profile.city}}
+            </ion-note>
+          </ion-item>
+            <ion-item *ngIf="editcity">
+              <ion-select style="max-width: 100% !important;" *ngIf="editcity" [(ngModel)]="city">
+                    <ion-option value="Abu Dhalouf">Abu Dhalouf</ion-option>
+                    <ion-option value="Abu Hamour">Abu Hamour</ion-option>
+                    <ion-option value="Abu Samra">Abu Samra</ion-option>
+                    <ion-option value="Ain Khaled">Ain Khaled</ion-option>
+                    <ion-option value="Ain Sinan">Ain Sinan</ion-option>
+                    <ion-option value="Al Aziziya">Al Aziziya</ion-option>
+                    <ion-option value="Al Bidda">Al Bidda</ion-option>
+                    <ion-option value="Al Daayen">Al Daayen</ion-option>
+                    <ion-option value="Al Dafna">Al Dafna</ion-option>
+                    <ion-option value="Al Ebb">Al Ebb</ion-option>
+                    <ion-option value="Al Egla">Al Egla</ion-option>
+                    <ion-option value="Al Gharafa">Al Gharafa</ion-option>
+                    <ion-option value="Al Ghuwariyah">Al Ghuwariyah</ion-option>
+                    <ion-option value="Al Jasrah">Al Jasrah</ion-option>
+                    <ion-option value="Al Jeryan">Al Jeryan</ion-option>
+                    <ion-option value="Al Karaana">Al Karaana</ion-option>
+                    <ion-option value="Al Kharaitiyat">Al Kharaitiyat</ion-option>
+                    <ion-option value="Al Kharayej">Al Kharayej</ion-option>
+                    <ion-option value="Al Kharrara">Al Kharrara</ion-option>
+                    <ion-option value="Al Kheesa">Al Kheesa</ion-option>
+                    <ion-option value="Al Khor">Al Khor</ion-option>
+                    <ion-option value="Al Khulaifat">Al Khulaifat</ion-option>
+                    <ion-option value="Al Luqta">Al Luqta</ion-option>
+                    <ion-option value="Al Mamoura">Al Mamoura</ion-option>
+                    <ion-option value="Al Mansoura">Al Mansoura</ion-option>
+                    <ion-option value="Al Markhiyah">Al Markhiyah</ion-option>
+                    <ion-option value="Al Mashaf">Al Mashaf</ion-option>
+                    <ion-option value="Al Masrouhiya">Al Masrouhiya</ion-option>
+                    <ion-option value="Al Mearad">Al Mearad</ion-option>
+                    <ion-option value="Al Meared">Al Meared</ion-option>
+                    <ion-option value="Al Najada">Al Najada</ion-option>
+                    <ion-option value="Al Nasraniya">Al Nasraniya</ion-option>
+                    <ion-option value="Al Qassar">Al Qassar</ion-option>
+                    <ion-option value="Al Rayyan">Al Rayyan</ion-option>
+                    <ion-option value="Al Rufaa">Al Rufaa</ion-option>
+                    <ion-option value="Al Sailiya">Al Sailiya</ion-option>
+                    <ion-option value="Al Sakhama">Al Sakhama</ion-option>
+                    <ion-option value="Al Seej">Al Seej</ion-option>
+                    <ion-option value="Al Shagub">Al Shagub</ion-option>
+                    <ion-option value="Al Tarfa">Al Tarfa</ion-option>
+                    <ion-option value="Al Thakhira">Al Thakhira</ion-option>
+                    <ion-option value="Al Themaid">Al Themaid</ion-option>
+                    <ion-option value="Al Thumama">Al Thumama</ion-option>
+                    <ion-option value="Al Utouriya">Al Utouriya</ion-option>
+                    <ion-option value="Al Waab">Al Waab</ion-option>
+                    <ion-option value="Al Wajba">Al Wajba</ion-option>
+                    <ion-option value="Al Wakrah">Al Wakrah</ion-option>
+                    <ion-option value="Al Wukair">Al Wukair</ion-option>
+                    <ion-option value="Al Zubarah">Al Zubarah</ion-option>
+                    <ion-option value="As Salatah">As Salatah</ion-option>
+                    <ion-option value="Bani Hajer">Bani Hajer</ion-option>
+                    <ion-option value="Barahat Al Jufairi">Barahat Al Jufairi</ion-option>
+                    <ion-option value="Bu Fasseela">Bu Fasseela</ion-option>
+                    <ion-option value="Bu Fesseela">Bu Fesseela</ion-option>
+                    <ion-option value="Bu Samra">Bu Samra</ion-option>
+                    <ion-option value="Bu Sidra">Bu Sidra</ion-option>
+                    <ion-option value="Dahl Al Hammam">Dahl Al Hammam</ion-option>
+                    <ion-option value="Doha International Airport">Doha International Airport</ion-option>
+                    <ion-option value="Doha Port">Doha Port</ion-option>
+                    <ion-option value="Feerej Bin Omran">Feerej Bin Omran</ion-option>
+                    <ion-option value="Fereej Abdel Aziz">Fereej Abdel Aziz</ion-option>
+                    <ion-option value="Fereej Al Amir">Fereej Al Amir</ion-option>
+                    <ion-option value="Fereej Al Asiri">Fereej Al Asiri</ion-option>
+                    <ion-option value="Fereej Al Asmakh">Fereej Al Asmakh</ion-option>
+                    <ion-option value="Fereej Al Manaseer">Fereej Al Manaseer</ion-option>
+                    <ion-option value="Fereej Al Mura">Fereej Al Mura</ion-option>
+                    <ion-option value="Fereej Al Murra">Fereej Al Murra</ion-option>
+                    <ion-option value="Fereej Al Nasr">Fereej Al Nasr</ion-option>
+                    <ion-option value="Fereej Al Soudan">Fereej Al Soudan</ion-option>
+                    <ion-option value="Fereej Al Zaeem">Fereej Al Zaeem</ion-option>
+                    <ion-option value="Fereej Bin Dirham">Fereej Bin Dirham</ion-option>
+                    <ion-option value="Fereej Bin Omran">Fereej Bin Omran</ion-option>
+                    <ion-option value="Fereej Kulaib">Fereej Kulaib</ion-option>
+                    <ion-option value="Gharafat Al Rayyan">Gharafat Al Rayyan</ion-option>
+                    <ion-option value="Hamad Medical City">Hamad Medical City</ion-option>
+                    <ion-option value="Hazm Al Markhiya">Hazm Al Markhiya</ion-option>
+                    <ion-option value="Jabal Thuaileb">Jabal Thuaileb</ion-option>
+                    <ion-option value="Jeryan Jenaihat">Jeryan Jenaihat</ion-option>
+                    <ion-option value="Jeryan Nejaima">Jeryan Nejaima</ion-option>
+                    <ion-option value="Khawr al Udayd">Khawr al Udayd</ion-option>
+                    <ion-option value="Madinat Al Kaaban">Madinat Al Kaaban</ion-option>
+                    <ion-option value="Madinat ash Shamal">Madinat ash Shamal</ion-option>
+                    <ion-option value="Madinat Khalifa North">Madinat Khalifa North</ion-option>
+                    <ion-option value="Madinat Khalifa South">Madinat Khalifa South</ion-option>
+                    <ion-option value="Mesaieed Industrial Area">Mesaieed Industrial Area</ion-option>
+                    <ion-option value="New Al Hitmi">New Al Hitmi</ion-option>
+                    <ion-option value="New Al Mirqab">New Al Mirqab</ion-option>
+                    <ion-option value="New Al Rayyan">New Al Rayyan</ion-option>
+                    <ion-option value="Old Al Ghanim">Old Al Ghanim</ion-option>
+                    <ion-option value="Old Al Hitmi">Old Al Hitmi</ion-option>
+                    <ion-option value="Old Al Rayyan">Old Al Rayyan</ion-option>
+                    <ion-option value="Ras Abu Aboud">Ras Abu Aboud</ion-option>
+                    <ion-option value="Rawdat Al Hamama">Rawdat Al Hamama</ion-option>
+                    <ion-option value="Rawdat Al Khail">Rawdat Al Khail</ion-option>
+                    <ion-option value="Rawdat Egdaim">Rawdat Egdaim</ion-option>
+                    <ion-option value="Rawdat Rashed">Rawdat Rashed</ion-option>
+                    <ion-option value="Sawda Natheel">Sawda Natheel</ion-option>
+                    <ion-option value="Umm Bab">Umm Bab</ion-option>
+                    <ion-option value="Umm Birka">Umm Birka</ion-option>
+                    <ion-option value="Umm Ghuwailina">Umm Ghuwailina</ion-option>
+                    <ion-option value="Umm Lekhba">Umm Lekhba</ion-option>
+                    <ion-option value="Umm Qarn">Umm Qarn</ion-option>
+                    <ion-option value="Umm Salal Ali">Umm Salal Ali</ion-option>
+                    <ion-option value="Umm Salal Mohammed">Umm Salal Mohammed</ion-option>
+                    <ion-option value="Umm Salal">Umm Salal</ion-option>
+                    <ion-option value="Wadi Al Banat">Wadi Al Banat</ion-option>
+                    <ion-option value="Wadi Al Sail">Wadi Al Sail</ion-option>
+                    <ion-option value="Wadi Al Wasaah">Wadi Al Wasaah</ion-option>
+                    <ion-option value="Wadi Lusail">Wadi Lusail</ion-option>
+              </ion-select>
+           </ion-item>
+          </ion-col>
+          <ion-col col-2>
+            <button  (click)="editCity()" *ngIf="!editcity" class="pencil" item-right>
+               <ion-icon ios="md-create" md="md-create" ></ion-icon>
+            </button>
+            <button  (click)="saveCity()" *ngIf="editcity" class="xpencil" item-right>
+                 <ion-icon ios="md-done-all" md="md-done-all" ></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <ion-item style="height: 150px" (click)="cancelEdit()">
+        </ion-item>
+
+      </ion-list>
+    </ion-card-content>
+
+</ion-content>

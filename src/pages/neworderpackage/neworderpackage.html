@@ -1,0 +1,68 @@
+<ion-header style="height:50px!important">
+
+  <ion-navbar>
+
+    <ion-title>
+      {{'Package'|translate}}
+    </ion-title>
+
+  <ion-buttons end>
+                <button ion-button icon-only (tap)="dismiss()" (click)="dismiss()">
+                    <ion-icon large item-right name="close"></ion-icon>
+                </button>
+            </ion-buttons>
+  </ion-navbar>
+
+
+
+</ion-header>
+
+<ion-content [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" no-bounce >
+  <ion-slides #signupSlider >
+    <ion-slide>
+      <ion-list no-lines >
+        <form #neworder [formGroup]="newOrderForm" (ngSubmit)="orderInfo()">
+          <ion-item style="direction:ltr" formGroupName="package" >
+              <ion-label color="primary" floating>{{'Package name'|translate}}</ion-label>
+            <ion-input  dir="auto" type="text" formControlName="title" name="title"
+             [(ngModel)]="order.package.title" ></ion-input>
+          </ion-item>
+
+          <ion-item  style="direction:ltr" formGroupName="package">
+            <ion-label color="primary" floating>{{'Note'|translate}}</ion-label>
+            <ion-textarea  dir="auto" type="text" formControlName="note" name="note"
+            [(ngModel)]="order.package.note"  ></ion-textarea>
+          </ion-item>
+
+          <input type="submit" style="visibility:hidden;position:absolute">
+        </form>
+
+        <ion-item>
+          <ion-note text-wrap>
+            {{'Package name : a reference to your package ,Ex : Necklace'|translate}}
+          </ion-note>
+
+        </ion-item>
+        <ion-item>
+          <ion-note text-wrap>
+            {{'Note : More info about your package ,Ex : 18 karats'|translate}}
+          </ion-note>
+
+        </ion-item>
+
+    </ion-list>
+
+  </ion-slide>
+
+</ion-slides>
+<ion-fab style="padding-bottom: 40px;" bottom right edge>
+  <button type="submit" (tap)="orderInfo()" (click)="orderInfo()" [disabled]="!isFormValid()" ion-fab >
+       <ion-icon name="arrow-round-forward" ></ion-icon>
+   </button>
+</ion-fab>
+<ion-fab [hidden]="order.shopping && !recieverMe" style="padding-bottom: 40px;padding-left: 10px;" bottom left edge>
+<button color="light" type="submit" (tap)="goBack()"  (click)="goBack()" ion-fab >
+     <ion-icon name="arrow-round-back" ></ion-icon>
+ </button>
+</ion-fab>
+</ion-content>

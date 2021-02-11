@@ -1,0 +1,99 @@
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title>
+       {{ 'Account' | translate}}
+    </ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content  overflow-scroll="true"  >
+      <!--<ion-list-header>Ionic</ion-list-header>-->
+    <ion-card-header [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']">
+    <ion-row>
+    {{ 'PERSONAL DETAILS' | translate}}
+    </ion-row>
+    </ion-card-header>
+    <ion-card-content *ngIf="customer" style="padding-top: 25px">
+      <ion-list>
+
+        <ion-row>
+          <ion-col col-10>
+            <ion-item *ngIf="!editname">
+              <ion-label stacked>{{ 'Name' | translate}}</ion-label>
+            <ion-note  item-right>
+            {{customer.user.username}}
+            </ion-note>
+          </ion-item>
+            <ion-item *ngIf="editname">
+               <ion-input  type="text"   [(ngModel)]="username"></ion-input>
+           </ion-item>
+          </ion-col>
+          <ion-col col-2>
+            <button  (click)="editUserName()" *ngIf="!editname" class="pencil" item-right>
+               <ion-icon ios="md-create" md="md-create" ></ion-icon>
+            </button>
+            <button  (click)="saveUserName()" *ngIf="editname" class="xpencil" item-right>
+                 <ion-icon ios="md-done-all" md="md-done-all" ></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+          <ion-col col-10>
+            <ion-item *ngIf="!editphone">
+              <ion-label stacked>{{ 'Phone' | translate}}</ion-label>
+            <ion-note  item-right>
+            {{customer.phone}}
+            </ion-note>
+          </ion-item>
+            <ion-item *ngIf="editphone">
+               <ion-input  type="tel"   [(ngModel)]="phone"></ion-input>
+           </ion-item>
+          </ion-col>
+          <ion-col col-2>
+            <button  (click)="editPhone()" *ngIf="!editphone" class="pencil" item-right>
+               <ion-icon ios="md-create" md="md-create" ></ion-icon>
+            </button>
+            <button  (click)="savePhone()" *ngIf="editphone" class="xpencil" item-right>
+                 <ion-icon ios="md-done-all" md="md-done-all" ></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-10>
+            <ion-item *ngIf="!editemail">
+              <ion-label stacked>{{ 'Email' | translate}}</ion-label>
+            <ion-note  item-right>
+            {{customer.email}}
+            </ion-note>
+          </ion-item>
+            <ion-item *ngIf="editemail">
+               <ion-input  type="email"   [(ngModel)]="email"></ion-input>
+           </ion-item>
+          </ion-col>
+          <ion-col col-2>
+            <button  (click)="editEmail()" *ngIf="!editemail" class="pencil" item-right>
+               <ion-icon ios="md-create" md="md-create" ></ion-icon>
+            </button>
+            <button  (click)="saveEmail()" *ngIf="editemail" class="xpencil" item-right>
+                 <ion-icon ios="md-done-all" md="md-done-all" ></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+
+      <ion-item style="height: 250px" (click)="cancelEdit()">
+
+      </ion-item>
+
+
+      </ion-list>
+      </ion-card-content>
+
+</ion-content>

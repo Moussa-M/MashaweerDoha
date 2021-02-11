@@ -1,0 +1,22 @@
+
+$navbar-ios-height:80px;
+.rtl_more{
+  position: absolute;z-index: 999;top:10px;left:10px
+}
+.ltr_more{
+  position: absolute;z-index: 999;top:10px;right:10px
+}
+.rtl_phone{
+  direction:ltr!important;
+  float:right;
+}
+.ltr_phone{
+  direction:ltr!important;
+  float:left;
+}
+.rtl_{
+  direction:rtl!important;
+}
+.ltr_{
+   direction:ltr!important;
+}

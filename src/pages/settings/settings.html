@@ -1,0 +1,64 @@
+<ion-header >
+
+  <ion-navbar >
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      {{'Settings' | translate}}
+    </ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" no-bounce >
+      <!--<ion-list-header>Ionic</ion-list-header>-->
+
+    <ion-card-header *ngIf="is_authenticated">
+    <ion-row tappable (click)="openProfilePage()">
+    <ion-col col-4>
+    <div  class="imgsize" item-left>
+        <img-loader *ngIf="profile.standard" [src]="profile.standard" useImg></img-loader>
+        <img-loader *ngIf="profile.standard == null" src="../www/assets/img/avatar.jpg" useImg></img-loader>
+      </div>
+    </ion-col>
+    <ion-col style="padding-top: 20px" *ngIf="customer" >
+
+             <div item-left>{{ customer.user.username }}</div>
+
+
+            <div [ngClass]="[language === 'ar' ? 'rtl_phone' : 'ltr_phone']" item-left>{{ customer.phone }}</div>
+
+    </ion-col>
+    </ion-row>
+
+    </ion-card-header>
+  <hr *ngIf="is_authenticated">
+    <ion-card-content *ngIf="profile">
+      <ion-list >
+       <button *ngIf="is_authenticated" detail-none ion-item  (click)="openAccountPage()" icon-left>
+        <ion-icon item-left ios="ios-key-outline" md="ios-key-outline" ></ion-icon>
+        {{'Account' | translate}}
+      </button>
+        <button detail-none ion-item  (click)="changeLan()" icon-left>
+        <ion-icon item-left ios="ios-globe-outline" md="ios-globe-outline"></ion-icon>
+          {{'Language' | translate}}
+      </button>
+      <button detail-none ion-item  (click)="openAboutPage()" icon-left>
+      <ion-icon item-left ios="ios-information-circle-outline" md="ios-information-circle-outline"></ion-icon>
+        {{'About' | translate}}
+    </button>
+      <button *ngIf="is_authenticated" detail-none ion-item  (click)="LogOut()" icon-left>
+        <ion-icon item-left ios="ios-log-out" md="ios-log-out"></ion-icon>
+         {{'LogOut' | translate}}
+      </button>
+      <button *ngIf="!is_authenticated" detail-none ion-item  (click)="LogIn()" icon-left>
+        <ion-icon item-left ios="ios-log-in" md="ios-log-in"></ion-icon>
+         {{'LogIn' | translate}}
+      </button>
+      </ion-list>
+    </ion-card-content>
+
+</ion-content>

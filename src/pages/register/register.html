@@ -1,0 +1,100 @@
+<ion-header>
+    <ion-navbar hideBackButton="true" color="primary">
+      <ion-title>
+        {{'Sign Up'|translate}}
+      </ion-title>
+      <ion-buttons start>
+        <button *ngIf="signupSlider.getActiveIndex()==1" ion-button icon-left (click)="prev()"><ion-icon name="arrow-back"></ion-icon> {{'Prev'|translate}}</button>
+        <button *ngIf="signupSlider.getActiveIndex()==0" ion-button icon-left (click)="dismiss()"><ion-icon name="arrow-back"></ion-icon> {{'Prev'|translate}}</button>
+      </ion-buttons>
+      <ion-buttons end>
+        <button *ngIf="signupSlider.getActiveIndex()==0" ion-button icon-right (click)="onSubmitONE()">{{'Next'|translate}} <ion-icon name="arrow-forward"></ion-icon></button>
+      </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" no-bounce>
+
+    <ion-slides #signupSlider >
+
+      <ion-slide>
+        <ion-list no-lines>
+        <form  [formGroup]="slideOneForm" (ngSubmit)="onSubmitONE()" >
+            <ion-item style="direction:ltr">
+                <ion-label color="primary" floating>{{'Phone'|translate}}</ion-label>
+                <ion-input autofocus  (ngModelChange)="phone_change()" (ionBlur)="phone_blur()" [textMask]="{mask: mask}" type="tel" [(ngModel)]="userAuth.phone" formControlName="phone" name="phone" ></ion-input>
+                <ion-icon name="ios-call-outline" item-right></ion-icon>
+            </ion-item>
+            <ion-item style="direction:ltr">
+                <ion-label color="primary" floating>{{'Email'|translate}}</ion-label>
+                <ion-input (ngModelChange)="email_change()" type="email" [(ngModel)]="userAuth.email" formControlName="email" name="email" ></ion-input>
+                <ion-icon name="ios-mail-outline" item-right></ion-icon>
+            </ion-item>
+            <input type="submit" style="visibility:hidden;position:absolute">
+         </form>
+      </ion-list>
+      <p *ngIf="phone_error" class="error" style="direction:ltr">
+        {{'Phone number is already used !.'|translate}}
+      </p>
+      <p *ngIf="email_error" class="error" style="direction:ltr">
+        {{'Email address is already used !.'|translate}}
+      </p>
+      <p *ngIf="(slideOneForm.hasError('email', 'email') && slideOneForm.get('email').touched) || (slideOneForm.get('email').pristine && submitedone)" class="error" style="direction:ltr">
+          {{'Email address is required.'|translate}}
+      </p>
+      <p *ngIf="(!slideOneForm.controls['phone'].valid && slideOneForm.controls['phone'].touched )|| (slideOneForm.get('phone').pristine && submitedone)" class="error" style="direction:ltr">
+          {{'Phone number is required.'|translate}}
+      </p>
+      </ion-slide>
+
+      <ion-slide>
+
+
+        <ion-list no-lines>
+        <form  [formGroup]="slideTwoForm" (ngSubmit)="onSubmit()">
+
+        <ion-item style="direction:ltr">
+            <ion-label color="primary" floating>{{'Name'|translate}}</ion-label>
+            <ion-input (ngModelChange)="username_change()" type="username" [(ngModel)]="userAuth.username" formControlName="username" name="username" ></ion-input>
+            <ion-icon name="ios-person-outline" item-right></ion-icon>
+        </ion-item>
+        <ion-row style="align-items: center;">
+        <ion-col class="pick" col-10>
+          <ion-item style="direction:ltr">
+              <ion-label color="primary" floating>{{'Password'|translate}}</ion-label>
+              <ion-input (ngModelChange)="password_change()" [type]="eye_open ? 'text' : 'password'" [(ngModel)]="userAuth.password"  formControlName="password" name="password"></ion-input>
+         </ion-item>
+        </ion-col>
+        <ion-col style="align-items: center;" data-tap-disabled="true" tappable (click)="toggleEye()">
+
+            <button data-tap-disabled="true" tappable style="padding:0px;margin:0 auto;font-size:22px" >
+              <ion-icon  *ngIf="!eye_open" name="ios-eye-outline" ></ion-icon>
+              <ion-icon  *ngIf="eye_open" name="ios-eye-off-outline" ></ion-icon>
+            </button>
+
+
+
+        </ion-col>
+      </ion-row>
+
+
+      </form>
+      </ion-list>
+      <p *ngIf="username_error" class="error" style="direction:ltr">
+        {{'Name is already used !.'|translate}}
+      </p>
+      <p *ngIf="(!slideTwoForm.controls['username'].valid && slideTwoForm.controls['username'].touched) || (slideTwoForm.controls['username'].pristine && submitedtwo)" class="error" style="direction:ltr">
+        {{'Name : only letters ,-,_ and numbers are allowed,at least 3 letters'|translate}}
+      </p>
+      <p *ngIf="(!slideTwoForm.controls['password'].valid && slideTwoForm.controls['password'].touched) || (slideTwoForm.controls['password'].pristine && submitedtwo)" class="error" style="direction:ltr">
+          {{'Password is required ,at least 8 letters.'|translate}}
+      </p>
+      <p *ngIf="password_error" class="error" style="direction:ltr">
+        {{'Password is too weak at least 8 letters.'|translate}}
+      </p>
+        <button ion-button full color="primary" [disabled]="!slideOneForm.valid || !slideTwoForm.valid" (click)="register()">{{'Create Account !'|translate}}</button>
+      </ion-slide>
+
+    </ion-slides>
+
+</ion-content>

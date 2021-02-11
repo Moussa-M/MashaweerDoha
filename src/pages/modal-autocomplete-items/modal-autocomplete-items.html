@@ -1,0 +1,40 @@
+<ion-header class="has-header">
+  <ion-navbar >
+    <ion-title>{{title}}</ion-title>
+       <ion-buttons end>
+                <button ion-button icon-only (click)="dismiss()">
+                    <ion-icon item-right name="close" large></ion-icon>
+                </button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']"  no-bounce  data-tap-disabled="true">
+    <ion-input  dir="auto"  margin #search
+        [(ngModel)]="autocomplete.query"
+        (ngModelChange)="updateSearch()"
+        placeholder="{{'Type a location or a place'|translate}}">
+    </ion-input>
+    <ion-row  *ngIf="autocomplete.query == ''">
+    <ion-col (tap)="chooseFromMap()">
+      <button style="color:black" ion-button icon-left clear small>
+        <ion-icon name="ios-map-outline"></ion-icon>
+        <div>{{'Choose from map' | translate}}</div>
+      </button>
+    </ion-col>
+    <ion-col (tap)="setCurrentLocation()">
+      <button style="color:black" ion-button icon-left clear small>
+        <ion-icon name="ios-navigate-outline"></ion-icon>
+        <div>{{'Current location' | translate}}</div>
+      </button>
+    </ion-col>
+  </ion-row>
+
+    <ion-list data-tap-disabled="true" >
+        <div data-tap-disabled="true"  tappable ion-item *ngFor="let item of autocompleteItems"
+            (click)="chooseItem(item)">
+            <ion-icon name="ios-pin-outline" small item-left></ion-icon>
+            {{ item.description }}
+        </div>
+    </ion-list>
+</ion-content>

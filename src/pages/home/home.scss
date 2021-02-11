@@ -1,0 +1,216 @@
+$popover-ios-width:90%;
+$popover-md-width:90%;
+	.rate-popover .popover-content{
+		width:90%!important;
+		top: 70px!important;
+		left:5%!important;
+		transform-origin: left top!important;
+		position: absolute;
+	}
+page-home {
+
+	#map{
+		width:100%;
+		height:300px;
+	}
+	.cardmorebtn{
+		background-color: white;
+		color:gray;
+		font-size:23px;
+		position: absolute;
+		top:0px;right:0px;
+		float:right;
+
+	}
+
+	.cardmorebtn:hover{
+			opacity:0.7;
+	}
+
+	.cardnotificationbtn-en{
+		background-color: transparent;
+		color:#3651d8;
+		font-size:20px;
+		position: absolute;
+		bottom:0px;
+		left:0px;
+		padding:0px;
+		float:left;
+	}
+	.cardnotificationbtn-ar{
+		background-color: transparent;
+		color:#3651d8;
+		font-size:20px;
+		position: absolute;
+		bottom:0px;
+		right:0px;
+		padding:0px;
+		float:left;
+	}
+	.o-not-ar{
+		position: absolute;
+		z-index: 999;
+		bottom:0px;
+		right:0px
+	}
+	.o-not-en{
+
+		position: absolute;
+		z-index: 999;
+		bottom:0px;
+		left:0px
+
+	}
+
+	.dis-opacity{
+		opacity:0.7;
+	}
+	.cardnotificationbtn:hover{
+			opacity:0.7;
+	}
+
+	.imgsize img{
+			width:48px;
+			height:48px;
+	}
+	.item-inner{
+		margin-left:0px !important;
+	}
+	.width80{
+		width: 80%;
+	}
+	.animate
+{
+    height: 0px;//or anything you need
+    transition: height 1s;
+}
+.trans{
+	background-color: transparent!important;
+}
+
+.timeline {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0px;
+}
+
+.li {
+  transition: all 200ms ease-in;
+  width:25%;
+}
+
+.timestamp {
+  margin-bottom: 0px;
+  padding: 0px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 100;
+}
+
+.status {
+  padding: 10px 10px;
+  display: flex;
+  justify-content: center;
+  border-top: 2px solid #D6DCE0;
+  position: relative;
+  transition: all 200ms ease-in;
+  h4 {
+    font-weight: 400;
+    font-size: 13px;
+  }
+  &:before {
+    content: "";
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: -15px;
+    left: 42%;
+    transition: all 200ms ease-in;
+  }
+}
+
+.li.complete .status {
+  border-top: 2px solid #66DC71;
+  &:before {
+    background-color: #66DC71;
+    border: none;
+    transition: all 200ms ease-in;
+  }
+  h4 {
+    color: #66DC71;
+  }
+}
+
+
+
+.m-fadeOut {
+  visibility: hidden;
+  opacity: 0;
+
+  transition: visibility 0s linear 300ms, opacity 200ms;
+}
+.m-fadeIn {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 200ms;
+}
+
+#toggleButton {
+  position: absolute;
+  left: 50px;
+  top: 20px;
+  background-color: #75C7F6;
+}
+.noorders{
+  width: 120px;
+  font-size: 25px !important;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top:40%;
+  margin: auto;
+  text-align: center;
+}
+.noordersx{
+  width: 80%;
+  font-size: 22px !important;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top:40%;
+	//color: black;
+  margin: auto;
+  text-align: center;
+}
+
+.rtl_more{
+  position: absolute;z-index: 999;top:5px;left:60px
+}
+.ltr_more{
+	position: absolute;z-index: 999;top:5px;right:5px
+}
+.rtl_phone{
+  direction:ltr!important;
+  float:right;
+}
+.ltr_phone{
+  direction:ltr!important;
+  float:left;
+}
+.rtl_{
+  direction:rtl;
+}
+.ltr_{
+   direction:ltr;
+}
+
+.popup-container {
+	 width:250px!important;
+}
+}

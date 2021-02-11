@@ -1,0 +1,111 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      {{ 'Order' | translate }} #{{order.num}}
+    </ion-title>
+
+      <ion-buttons end>
+                <button ion-button icon-only (tap)="dismiss()">
+                    <ion-icon item-right name="close" large></ion-icon>
+                </button>
+      </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']">
+<div class="mapContainer">
+  <div #map id="map_canvas">
+      </div>
+</div>
+
+  <div  text-wrap>
+
+  <div tappable ion-item (tap)="openLocationStart()">
+    <ion-icon name="ios-pin-outline" item-left ></ion-icon>
+    <h2>{{order.location.pick_up_name}}</h2>
+    <p>{{order.location.pick_up_lat}},{{order.location.pick_up_long}}</p>
+  </div>
+
+  <div tappable ion-item (tap)="openLocationEnd()">
+    <ion-icon name="ios-flag-outline" item-left  ></ion-icon>
+    <h2>{{order.location.drop_off_name}}</h2>
+    <p>{{order.location.drop_off_lat}},{{order.location.drop_off_long}}</p>
+  </div>
+<hr style="margin:0px;padding: 0px;background-color: lightgray">
+  <ion-item>
+    <ion-icon name="ios-basket-outline" item-left ></ion-icon>
+    <h2>{{ order.package.title }}</h2>
+    <p>{{ order.package.note }}</p>
+  </ion-item>
+<hr style="margin:0px;padding: 0px;background-color: lightgray">
+  <ion-item>
+    <ion-icon name="ios-cash-outline" item-left ></ion-icon>
+    <h2>{{'Delivery fare'|translate}}</h2>
+    <p>{{ order.order_payment.delivery_price }} {{ 'QAR' | translate }}</p>
+  </ion-item>
+   <ion-item>
+    <ion-icon name="ios-cash-outline" item-left ></ion-icon>
+    <h2>{{'Package price'|translate}}</h2>
+    <p>{{ order.order_payment.package_price }} {{ 'QAR' | translate }}</p>
+  </ion-item>
+<hr style="margin:0px;padding: 0px;background-color: lightgray;">
+  <ion-item style="background-color: white!important">
+    <ion-icon name="ios-clock-outline" item-left ></ion-icon>
+    <h2>{{ 'Pick up time' | translate }}</h2>
+    <p>{{ order.pickup_time | date: 'dd/MM/yyyy H:mm' }}</p><p *ngIf="order.pickup_time_asap">({{ "Asap" | translate }})</p>
+  </ion-item>
+
+  <ion-item style="background-color: white!important">
+    <ion-icon name="ios-clock-outline" item-left ></ion-icon>
+    <h2>{{ 'Drop off time' | translate }}</h2>
+    <p style="background-color: white!important" >{{ order.dropoff_time | date: 'dd/MM/yyyy H:mm' }}</p><p *ngIf="order.dropoff_time_asap">({{ "Asap" | translate}})</p>
+  </ion-item>
+  <hr style="margin:0px;padding: 0px;background-color: lightgray;">
+   <ion-item  style="background-color: white!important"  *ngIf="order.driver_username">
+ <ion-icon name="ios-car-outline" item-right large ></ion-icon>
+    <div class="imgsize" item-left>
+      <img (tap)="openDriverImage(order)" *ngIf="order.driver_img" [src]="order.driver_img">
+      <img *ngIf="order.driver_img == null" src="../assets/img/avatar.jpg">
+    </div>
+    <h2 tappable (tap)="callPhoneNumber(order.driver_phone)"  *ngIf="order.driver_fullname">{{order.driver_fullname }}</h2>
+    <h2 tappable (tap)="callPhoneNumber(order.driver_phone)"  *ngIf="order.driver_fullname == null">{{order.driver_username }}</h2>
+    <p tappable (tap)="callPhoneNumber(order.driver_phone)" [ngClass]="[language === 'ar' ? 'rtl_phone' : 'ltr_phone']">{{ order.driver_phone }}</p>
+  </ion-item>
+
+
+<hr style="margin:0px;padding: 0px;background-color: lightgray">
+  <ion-item>
+    <ion-icon name="ios-call-outline" item-left ></ion-icon>
+    <h2>{{ 'Receiver phone' | translate }}</h2>
+    <p [ngClass]="[language === 'ar' ? 'rtl_phone' : 'ltr_phone']">{{ order.reciever_phone }}</p>
+  </ion-item>
+
+  <ion-item>
+
+    <span item-left>{{ 'Ordered on' | translate }} {{order.ordering_time | date: 'dd/MM/yyyy H:mm'}}</span>
+
+  </ion-item>
+
+</div>
+
+<!--
+   <ion-fab *ngIf="(order.order_status.customer_order_status === 'PENDING' || order.order_status.customer_order_status === 'INROW') || order.order_status.customer_order_status != 'INPROGRESS'" style="padding-bottom: 40px;padding-right: 17px;" bottom right edge>
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="left">
+    <button color="danger" (tap)="deleteOrder()" *ngIf="order.order_status.customer_order_status != 'INPROGRESS'"  ion-fab>
+      <ion-icon name="ios-trash-outline"></ion-icon>
+    </button>
+      <button *ngIf="order.order_status.customer_order_status === 'PENDING' || order.order_status.customer_order_status === 'INROW'" (tap)="openEditModel()" ion-fab><ion-icon name="ios-create-outline"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab> -->
+
+
+
+</ion-content>

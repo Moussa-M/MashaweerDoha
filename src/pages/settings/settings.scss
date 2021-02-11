@@ -1,0 +1,51 @@
+page-settings {
+	ion-card{
+    margin: 3px !important;
+    width: calc(100% - 6px) !important;
+    .uploadWrap{
+        ion-icon{
+            color:#777;
+            font-size: 150px;
+            text-align: center !important;
+            display: block;
+        }
+    }
+    button{
+        height: 40px !important;
+    }
+}
+    .imgsize img{
+            width:80px;
+            height:80px;
+            border-radius: 50%;
+    }
+    .img-loaded + ion-spinner {
+        display:none;
+    }
+    // .center in my case to make the spinner at the center
+    .center{
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+.rtl_more{
+  position: absolute;z-index: 999;top:10px;left:10px
+}
+.ltr_more{
+  position: absolute;z-index: 999;top:10px;right:10px
+}
+.rtl_phone{
+  direction:ltr!important;
+  float:right;
+}
+.ltr_phone{
+  direction:ltr!important;
+  float:left;
+}
+.rtl_{
+  direction:rtl;
+}
+.ltr_{
+   direction:ltr;
+}
+}

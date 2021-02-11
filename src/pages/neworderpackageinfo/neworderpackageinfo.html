@@ -1,0 +1,90 @@
+<ion-header style="height:50px!important">
+
+  <ion-navbar >
+
+    <ion-title>
+      {{'Package'|translate}}
+    </ion-title>
+
+  <ion-buttons end>
+                <button ion-button icon-only (tap)="dismiss()" (click)="dismiss()">
+                    <ion-icon large item-right name="close"></ion-icon>
+                </button>
+            </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content [ngClass]="[language === 'ar' ? 'rtl_' : 'ltr_']" no-bounce >
+  <ion-slides>
+    <ion-slide>
+ <ion-list no-lines>
+<form #neworder [formGroup]="newOrderForm">
+ <ion-list style="margin:0px;margin-top:5px;background-color: white!important" no-lines>
+  <ion-item style="direction:ltr" >
+   <ion-label [ngClass]="[order.shopping === false ? 'disabled-label' : '']">{{'Shopping'|translate}}</ion-label>
+   <ion-toggle (ngModelChange)="shopping_toggle($event)" [(ngModel)]="order.shopping" formControlName="shopping" name="shopping" ></ion-toggle>
+ </ion-item>
+ <!-- <ion-note text-wrap padding margin *ngIf="shopping" formGroupName="order_payment">
+      There may be some extra fee if our agent took more than 20 Mins doing your shopping.
+</ion-note> -->
+   <ion-item style="direction:ltr"  *ngIf="order.shopping" formGroupName="order_payment">
+
+        <ion-input  [(ngModel)]="order.order_payment.package_price" formControlName="package_price"
+         min="0"  name="package_price" placeholder="{{'Package price'|translate}}" step="0.5" type="number">
+        </ion-input>
+        <ion-icon *ngIf="language=='en'" name="qar" small item-right></ion-icon>
+        <ion-icon *ngIf="language=='ar'" name="qar-a" small item-right></ion-icon>
+  </ion-item>
+
+</ion-list>
+
+<ion-list no-lines style="margin:0px;background-color: white!important">
+
+  <ion-item style="direction:ltr" >
+   <ion-label [ngClass]="[recieverMe === false ? 'disabled-label' : '']">{{'Receiver phone(Me)'|translate}}</ion-label>
+   <ion-toggle (ngModelChange)="recieverMe_toggle($event)" [(ngModel)]="recieverMe"  [ngModelOptions]="{standalone: true}" ></ion-toggle>
+ </ion-item>
+    <ion-item style="direction:ltr" *ngIf="recieverMe==false">
+        <ion-input (ionBlur)="phone_blur()"  [ngClass]="[language === 'ar' ? 'rtl_phone' : 'ltr_phone']"
+        (ngModelChange)="recieverMe_changed($event)" [textMask]="{mask: mask}" type="tel"
+        formControlName="reciever_phone" name="reciever_phone" [(ngModel)]="order.reciever_phone"
+         clearInput placeholder="{{'Receiver phone'|translate}}"></ion-input>
+    </ion-item>
+  </ion-list>
+
+<ion-list style="margin-bottom:0px" no-lines>
+
+  <div  data-tap-disabled="true" tappable (tap)="changePackageImg()" (press)="changePackageImg()" class="profile-image-wrapper" >
+    <div  class="profile-image-placeholder" *ngIf="P_IMG==null">
+      <ion-icon name="add"></ion-icon>
+      <div>
+        {{ 'Package Image' | translate }}
+      </div>
+    </div>
+    <div  class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="P_IMG != null"></div>
+  </div>
+
+</ion-list>
+
+</form>
+<ion-item>
+  <ion-note text-wrap>
+    {{'Shopping : In case you want us to buy the package for you, Please fill its price or an estimation of its price.'|translate}}
+  </ion-note>
+
+</ion-item>
+ </ion-list>
+  </ion-slide>
+</ion-slides >
+  <ion-fab style="padding-bottom: 40px;" bottom right edge>
+    <button type="submit" (tap)="addOrder()" (click)="addOrder()" [disabled]="!isFormValid()" ion-fab >
+         <ion-icon name="checkmark" ></ion-icon>
+     </button>
+  </ion-fab>
+    <ion-fab style="padding-bottom: 40px;padding-left: 10px;" bottom left edge>
+    <button color="light" type="submit"  (tap)="goBack()"  (click)="goBack()" ion-fab >
+         <ion-icon name="arrow-round-back" ></ion-icon>
+     </button>
+  </ion-fab>
+</ion-content>
