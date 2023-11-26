@@ -5,7 +5,7 @@ An on-demand delivery app crafted in Ionic 4 and Angular 8.
 
 ### Open Source Code
 Feel free to utilize the source code in any way you find useful. :)
-[Available on Playstore](https://play.google.com/store/apps/details?id=com.mashaweerdoha.mashdc)
+[Playstore](https://play.google.com/store/apps/details?id=com.mashaweerdoha.mashdc)
 
 > 🚧 Note
 > This application is no longer actively maintained.
